@@ -1,0 +1,78 @@
+# ── Dependencies ──
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Build output ──
+frontend/.next/
+frontend/out/
+*.tsbuildinfo
+
+# ── Runtime data ──
+backend/data/
+backend/deployed_apps/
+backend/uploads/
+data/
+deployed_apps/
+uploads/
+
+# ── Environment & secrets ──
+.env
+.env.local
+.env.*.local
+
+# ── OS files ──
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ── IDE ──
+.vscode/
+.idea/
+*.code-workspace
+
+# ── Logs ──
+*.log
+npm-debug.log*
+
+# ── CoreDNS dynamic hosts ──
+coredns/hosts
+
+# ── Docs build artifacts ──
+docs/node_modules/
+docs/build_*.js
+docs/package-lock.json
+
+# ── PDF specs (large binary) ──
+*.pdf
+
+# ── Exports ──
+backend/exports/
+backend/data/exports/
+
+# ── License bound file (machine-specific) ──
+.ivs/
+license.bound
+
+# ── Build artifacts already excluded above but be explicit ──
+*.tsbuildinfo
+frontend/tsconfig.tsbuildinfo
+
+# ── Internal design docs / planning (not part of Free release) ──
+CLAUDE.md
+vibe_server_specification*.md
+docs/IVS_Licensing_Plan*.docx
+docs/IVS_Test_Plan*.docx
+docs/IVS_Verification_Checklist*.docx
+docs/build_*.js
+docs/node_modules/
+docs/package*.json
+
+# ── Old compose file replaced by docker-compose.free.yml ──
+docker-compose.yml
+
