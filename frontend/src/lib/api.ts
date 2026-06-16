@@ -1,3 +1,43 @@
+// ─── API Catalog types (v1.0.1) ──────────────────────────────────────────── //
+export interface CatalogEntry {
+  id: number;
+  app_id: number | null;
+  name: string;
+  method: string;
+  path: string;
+  base_url: string;
+  full_url: string;
+  api_key: string | null;
+  has_api_key: boolean;
+  schema_snippet: string | null;
+  schema_size: number;
+  description: string;
+  category: string;
+  current_version: number;
+  last_test_at: string | null;
+  last_test_status: string;
+  last_test_message: string;
+  last_test_http_code: number | null;
+  last_test_latency_ms: number | null;
+  is_active: boolean;
+  discovery_source: string;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface CatalogVersion {
+  id: number;
+  catalog_id: number;
+  version_number: number;
+  base_url: string;
+  has_api_key: boolean;
+  method: string;
+  path: string;
+  replaced_by_id: number | null;
+  reason: string;
+  created_at: string | null;
+}
+
 // ─── Enterprise types ────────────────────────────────────────────────────── //
 export interface MachineRegistryEntry {
   id: number;
@@ -636,4 +676,64 @@ export const api = {
 
   discoverEnterpriseMachines: () =>
     request<DiscoveredMachine[]>("/enterprise/machines/discover"),
+
+  // ── API Catalog ────────────────────────────────────────────────────────── //
+  listCatalog: () =>
+    request<CatalogEntry[]>("/catalog"),
+
+  getCatalogEntry: (id: number) =>
+    request<CatalogEntry>(`/catalog/${id}`),
+
+  createCatalogEntry: (data: {
+    name: string;
+    base_url: string;
+    method?: string;
+    path?: string;
+    api_key?: string;
+    api_schema?: string;
+    description?: string;
+    category?: string;
+    app_id?: number;
+  }) =>
+    request<CatalogEntry>("/catalog", { method: "POST", body: JSON.stringify(data) }),
+
+  scanCatalog: () =>
+    request<{
+      scanned: number;
+      new: number;
+      updated: number;
+      failed: number;
+      details: { slug: string; status: string }[];
+    }>("/catalog/scan", { method: "POST" }),
+
+  testCatalogEntry: (id: number) =>
+    request<{
+      status: string;
+      http_code: number | null;
+      latency_ms: number;
+      message: string;
+      body_snippet: string;
+    }>(`/catalog/${id}/test`, { method: "POST" }),
+
+  replaceCatalogEntry: (id: number, data: {
+    base_url?: string;
+    api_key?: string;
+    api_schema?: string;
+    method?: string;
+    path?: string;
+    reason?: string;
+  }) =>
+    request<CatalogEntry>(`/catalog/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+
+  getCatalogHistory: (id: number) =>
+    request<CatalogVersion[]>(`/catalog/${id}/history`),
+
+  restoreCatalogVersion: (entryId: number, versionId: number) =>
+    request<CatalogEntry>(`/catalog/${entryId}/restore/${versionId}`, { method: "POST" }),
+
+  revealCatalogKey: (id: number) =>
+    request<CatalogEntry>(`/catalog/${id}/reveal-key`, { method: "POST" }),
+
+  deleteCatalogEntry: (id: number) =>
+    request<void>(`/catalog/${id}`, { method: "DELETE" }),
 };

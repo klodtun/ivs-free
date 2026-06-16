@@ -13,7 +13,7 @@
  */
 export const features = {
   // Sidebar entries
-  api_catalog: false,
+  api_catalog: true,   // v1.0.1 — managed catalog of deployed-app APIs
 
   // Settings tabs
   dns_tab: false,
