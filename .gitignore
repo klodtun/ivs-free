@@ -63,15 +63,12 @@ license.bound
 *.tsbuildinfo
 frontend/tsconfig.tsbuildinfo
 
-# ── Internal design docs / planning / business (not part of Free release) ──
+# ── Internal design docs / planning (not part of Free release) ──
 CLAUDE.md
 vibe_server_specification*.md
 docs/IVS_Licensing_Plan*.docx
 docs/IVS_Test_Plan*.docx
 docs/IVS_Verification_Checklist*.docx
-docs/IVS_Copyright_Submission*.docx
-docs/IVS_Pitch_Deck*.docx
-docs/IVS_depa*.docx
 docs/build_*.js
 docs/node_modules/
 docs/package*.json

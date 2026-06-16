@@ -39,6 +39,16 @@ _HEALTH_CACHE: dict = {"ts": 0.0, "payload": None}
 _HEALTH_TTL = 3.0
 
 
+@router.get("/version")
+async def get_public_version():
+    """Public endpoint — login page reads this without auth."""
+    return {
+        "name": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "edition": "FREE",
+    }
+
+
 @router.get("/health", response_model=SystemHealth)
 async def get_system_health(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     import time

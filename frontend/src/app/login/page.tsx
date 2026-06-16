@@ -298,11 +298,29 @@ export default function LoginPage() {
             )}
           </div>
         </div>
-        <div className="mt-4 text-center text-[10px] text-gray-400 leading-relaxed select-none">
-          © 2026 IVS Project · {t("copyright.all_rights")}<br />
-          {t("copyright.eula_notice")}
-        </div>
+        <LoginFooter t={t} />
       </div>
+    </div>
+  );
+}
+
+function LoginFooter({ t }: { t: (k: string) => string }) {
+  const [version, setVersion] = useState<{ version: string; edition: string } | null>(null);
+  useEffect(() => {
+    fetch("/api/system/version")
+      .then(r => r.ok ? r.json() : null)
+      .then(d => d && setVersion({ version: d.version, edition: d.edition }))
+      .catch(() => {});
+  }, []);
+  return (
+    <div className="mt-4 text-center text-[10px] text-gray-400 leading-relaxed select-none">
+      {version && (
+        <div className="text-gray-500 font-medium mb-1">
+          iVS v{version.version} · {version.edition} Edition
+        </div>
+      )}
+      © 2026 IVS Project · {t("copyright.all_rights")}<br />
+      {t("copyright.eula_notice")}
     </div>
   );
 }
