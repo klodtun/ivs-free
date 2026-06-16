@@ -254,6 +254,8 @@ const translations: Record<Locale, Record<string, string>> = {
     // Vault
     "vault.title": "คลัง API Key",
     "vault.subtitle": "จัดการ API Key ขององค์กร (เข้ารหัส AES-256)",
+    "vault.tab.keys": "คลัง API Key",
+    "vault.tab.programs": "คลังAPI โปรแกรม",
     "vault.add": "+ เพิ่ม Key",
     "vault.cancel": "ยกเลิก",
     "vault.add_title": "เพิ่ม API Key ใหม่",
@@ -1396,6 +1398,8 @@ frontend/dist/         → Optional (iVS auto-builds if missing)
 
     "vault.title": "API Key Vault",
     "vault.subtitle": "Secure enterprise API key management (AES-256 encrypted)",
+    "vault.tab.keys": "API Keys",
+    "vault.tab.programs": "App APIs",
     "vault.add": "+ Add Key",
     "vault.cancel": "Cancel",
     "vault.add_title": "Add New API Key",
